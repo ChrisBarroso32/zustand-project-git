@@ -1,4 +1,5 @@
 import {create} from "zustand";
+import {produce} from "immer";
 
 const initialState = {
     user: {
@@ -19,16 +20,7 @@ const initialState = {
 export const useStore = create((set) => ({
     ...initialState,
     updateAdressStreet: (street) =>
-        set((state) => ({
-            user: {
-                ...state.user,
-                profile: {
-                    ...state.user.profile,
-                    address: {
-                        ...state.user.profile.address,
-                        street: street,
-                    },
-                },
-            },
-        })),
-}))
+        set(produce((state) => {
+        state.user.profile.address.street = street;
+    })),
+}));
