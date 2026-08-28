@@ -2,12 +2,9 @@ import React from 'react'
 import {useCartStore} from "../store/cartStore.js";
 
 const Cart = () => {
-    const { cart, removeFromCart, clearCart} = useCartStore((state) => ({
-        cart: state.cart,
-        removeFromCart: state.removeFromCart,
-        clearCart: state.clearCart,
-    }));
-
+    const cart = useCartStore((state) => state.cart);
+    const removeFromCart = useCartStore((state) => state.removeFromCart);
+    const clearCart = useCartStore((state) => state.clearCart);
     return (
         <div className="bg-white rounded-2xl shadow-md p-6 sticky top-8">
             <h2 className="text-2xl font-bold text-gray-800 border-b border-gray-200 pb-4 mb-4">
