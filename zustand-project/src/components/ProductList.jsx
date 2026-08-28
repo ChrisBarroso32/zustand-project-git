@@ -1,6 +1,8 @@
 import React from 'react'
+import {useCartStore} from "../store/cartStore.js";
 
-const ProductList = ({ products, setCart }) => {
+const ProductList = ({products}) => {
+    const addToCart = useCartStore((state) => state.addToCart);
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
             {products?.map((product) => (
@@ -17,7 +19,7 @@ const ProductList = ({ products, setCart }) => {
                         </p>
                     </div>
                     <button
-                        onClick={() => setCart((cart) => [...cart, product])}
+                        onClick={() => addToCart(product)}
                         className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 px-4 rounded-lg transition-colors duration-200"
                     >
                         Agregar al carrito

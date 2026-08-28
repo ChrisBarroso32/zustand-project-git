@@ -1,6 +1,13 @@
 import React from 'react'
+import {useCartStore} from "../store/cartStore.js";
 
-const Cart = ({ cart, setCart }) => {
+const Cart = () => {
+    const { cart, removeFromCart, clearCart} = useCartStore((state) => ({
+        cart: state.cart,
+        removeFromCart: state.removeFromCart,
+        clearCart: state.clearCart,
+    }));
+
     return (
         <div className="bg-white rounded-2xl shadow-md p-6 sticky top-8">
             <h2 className="text-2xl font-bold text-gray-800 border-b border-gray-200 pb-4 mb-4">
@@ -20,7 +27,7 @@ const Cart = ({ cart, setCart }) => {
                                 {product.name}
                             </span>
                             <button
-                                onClick={() => setCart(cart.filter((item) => item.id !== product.id))}
+                                onClick={() => removeFromCart(product.id)}
                                 className="text-sm text-red-500 hover:text-red-700 hover:bg-red-50 font-semibold px-2 py-1 rounded transition-colors"
                             >
                                 Quitar
@@ -32,10 +39,10 @@ const Cart = ({ cart, setCart }) => {
 
             {cart.length > 0 && (
                 <button
-                    onClick={() => setCart([])}
+                    onClick={clearCart}
                     className="w-full mt-6 bg-red-100 text-red-600 hover:bg-red-200 font-bold py-2 px-4 rounded-lg transition-colors duration-200"
                 >
-                    Borrar Todo
+                    Vaciar Carrito
                 </button>
             )}
         </div>
